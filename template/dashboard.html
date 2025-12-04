@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Talksy.id</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            /* Modern Islamic Palette */
+            --color-primary: #065F46;    /* Emerald 800 - Base */
+            --color-primary-hover: #047857;
+            --color-primary-light: #D1FAE5; /* Emerald 100 - Active Bg */
+            --color-accent: #D4AF37;     /* Gold - Highlights */
+            --color-surface: #F8FAFC;    /* Slate 50 - Background */
+            --color-card: #FFFFFF;       /* White */
+
+            --font-sans: "Plus Jakarta Sans", sans-serif;
+        }
+
+        /* Custom Scrollbar for Sidebar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-sans text-slate-600 antialiased" x-data="dashboardLogic()">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <div x-show="isSidebarOpen"
+             @click="isSidebarOpen = false"
+             x-transition:enter="transition-opacity ease-linear duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity ease-linear duration-300"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/50 z-40 lg:hidden backdrop-blur-sm">
+        </div>
+
+        <aside :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+               class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 flex flex-col shadow-2xl lg:shadow-none">
+
+            <div class="h-16 flex items-center px-6 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                        <i class="ph-bold ph-chat-circle-text text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-primary tracking-tight">Talksy<span class="text-accent">.id</span></span>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto py-4 px-3 space-y-1 no-scrollbar">
+
+                <div class="px-3 mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Main Menu</div>
+
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/5 text-primary font-semibold transition-colors">
+                    <i class="ph-duotone ph-squares-four text-xl"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors group">
+                    <i class="ph-duotone ph-book-open-text text-xl group-hover:text-primary"></i>
+                    <span>My Learning</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors group">
+                    <i class="ph-duotone ph-certificate text-xl group-hover:text-primary"></i>
+                    <span>Certificates</span>
+                </a>
+
+                <div class="my-4 border-t border-slate-100"></div>
+
+                <div class="px-3 mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Account</div>
+
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors group">
+                        <div class="flex items-center gap-3">
+                            <i class="ph-duotone ph-gear text-xl group-hover:text-primary"></i>
+                            <span>Settings</span>
+                        </div>
+                        <i class="ph-bold ph-caret-down transition-transform duration-200" :class="open ? 'rotate-180' : ''"></i>
+                    </button>
+
+                    <div x-show="open" x-collapse class="pl-10 mt-1 space-y-1">
+                        <a href="#" class="block px-3 py-2 text-sm rounded-lg text-slate-500 hover:text-primary hover:bg-slate-50">Profile</a>
+                        <a href="#" class="block px-3 py-2 text-sm rounded-lg text-slate-500 hover:text-primary hover:bg-slate-50">Password</a>
+                        <a href="#" class="block px-3 py-2 text-sm rounded-lg text-slate-500 hover:text-primary hover:bg-slate-50">Notifications</a>
+                    </div>
+                </div>
+
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors group">
+                    <i class="ph-duotone ph-credit-card text-xl group-hover:text-primary"></i>
+                    <span>Billing</span>
+                </a>
+            </div>
+
+            <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+                <div class="flex items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name=Fatih+Karim&background=065F46&color=fff" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" alt="User">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold text-slate-800 truncate">Fatih Karim</p>
+                        <p class="text-xs text-slate-500 truncate">Student</p>
+                    </div>
+                    <button class="text-slate-400 hover:text-red-500 transition">
+                        <i class="ph-bold ph-sign-out text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+            <header class="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">
+
+                <div class="flex items-center gap-4">
+                    <button @click="isSidebarOpen = true" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+                        <i class="ph-bold ph-list text-2xl"></i>
+                    </button>
+                    <nav class="hidden sm:flex text-sm font-medium text-slate-500">
+                        <a href="#" class="hover:text-primary">Home</a>
+                        <span class="mx-2 text-slate-300">/</span>
+                        <span class="text-primary font-bold">Dashboard</span>
+                    </nav>
+                </div>
+
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <button class="relative p-2 rounded-full text-slate-500 hover:bg-slate-100 hover:text-primary transition">
+                        <i class="ph-bold ph-bell text-xl"></i>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                    </button>
+
+                    <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+                    <div class="flex items-center gap-2 cursor-pointer" x-data="{ open: false }" @click.away="open = false">
+                        <button @click="open = !open" class="flex items-center gap-2 focus:outline-none">
+                            <span class="text-sm font-semibold text-slate-700 hidden sm:block">Halo, Fatih</span>
+                            <i class="ph-bold ph-caret-down text-slate-400"></i>
+                        </button>
+
+                        <div x-show="open"
+                             x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="transform opacity-0 scale-95"
+                             x-transition:enter-end="transform opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-75"
+                             x-transition:leave-start="transform opacity-100 scale-100"
+                             x-transition:leave-end="transform opacity-0 scale-95"
+                             class="absolute right-4 top-14 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-600 hover:bg-primary/5 hover:text-primary">My Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-600 hover:bg-primary/5 hover:text-primary">Support</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 lg:p-8">
+
+                <div class="bg-gradient-to-r from-primary to-emerald-600 rounded-3xl p-6 md:p-10 text-white shadow-lg shadow-primary/20 mb-8 relative overflow-hidden">
+                    <i class="ph-duotone ph-quotes text-9xl absolute -right-4 -bottom-8 text-white/10"></i>
+
+                    <div class="relative z-10">
+                        <h1 class="text-2xl md:text-3xl font-bold mb-2">Ahlan wa Sahlan, Fatih! 👋</h1>
+                        <p class="text-emerald-100 max-w-xl">
+                            "Barangsiapa menempuh jalan untuk menuntut ilmu, Allah akan mudahkan baginya jalan menuju surga."
+                        </p>
+                        <button class="mt-6 px-6 py-2.5 bg-white text-primary font-bold rounded-full shadow-sm hover:bg-emerald-50 transition flex items-center gap-2">
+                            <i class="ph-bold ph-play-circle"></i>
+                            Lanjutkan Belajar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="ph-duotone ph-book-bookmark text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Modul Selesai</p>
+                            <h3 class="text-2xl font-bold text-slate-800">3/12</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
+                            <i class="ph-duotone ph-clock-countdown text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Jam Belajar</p>
+                            <h3 class="text-2xl font-bold text-slate-800">18 Jam</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                            <i class="ph-duotone ph-trophy text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Avg. Score</p>
+                            <h3 class="text-2xl font-bold text-slate-800">85.5</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-lg text-slate-800">Lanjutkan Modul</h3>
+                            <a href="#" class="text-sm text-primary font-semibold hover:underline">Lihat Semua</a>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary/5 transition group cursor-pointer">
+                                <div class="w-16 h-16 rounded-lg bg-slate-200 bg-cover bg-center shrink-0" style="background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=100&q=80');"></div>
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-bold text-slate-800 group-hover:text-primary truncate">Basic Conversation: Greeting</h4>
+                                    <div class="flex items-center gap-3 mt-1">
+                                        <div class="w-full max-w-[150px] h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary w-[75%]"></div>
+                                        </div>
+                                        <span class="text-xs text-slate-500">75%</span>
+                                    </div>
+                                </div>
+                                <button class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition">
+                                    <i class="ph-fill ph-play"></i>
+                                </button>
+                            </div>
+
+                            <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary/5 transition group cursor-pointer">
+                                <div class="w-16 h-16 rounded-lg bg-slate-200 bg-cover bg-center shrink-0" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=100&q=80');"></div>
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-bold text-slate-800 group-hover:text-primary truncate">Business Email Mastery</h4>
+                                    <div class="flex items-center gap-3 mt-1">
+                                        <div class="w-full max-w-[150px] h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary w-[10%]"></div>
+                                        </div>
+                                        <span class="text-xs text-slate-500">10%</span>
+                                    </div>
+                                </div>
+                                <button class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition">
+                                    <i class="ph-fill ph-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-accent/10 rounded-2xl p-6 border border-accent/20">
+                        <h3 class="font-bold text-lg text-amber-900 mb-4 flex items-center gap-2">
+                            <i class="ph-duotone ph-lightbulb text-accent text-2xl"></i>
+                            Daily Vocab
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-xl shadow-sm">
+                                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Word of the day</p>
+                                <h4 class="text-xl font-bold text-primary">Benevolence</h4>
+                                <p class="text-sm text-slate-600 italic mt-1">/bəˈnevələns/</p>
+                                <p class="text-sm text-slate-700 mt-2">Kebaikan hati; kecenderungan untuk berbuat baik.</p>
+                            </div>
+                            <button class="w-full py-3 rounded-xl bg-amber-900 text-white text-sm font-bold hover:bg-amber-800 transition">
+                                Simpan ke Kamus
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function dashboardLogic() {
+            return {
+                isSidebarOpen: false,
+                // Tambahkan logic lain jika perlu
+            }
+        }
+    </script>
+</body>
+</html>

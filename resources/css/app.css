@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/*
+|--------------------------------------------------------------------------
+| 1. Design Tokens (Single Source of Truth)
+|--------------------------------------------------------------------------
+| Definisikan semua variabel desain di sini.
+*/
+@theme {
+    /* Brand Colors (Talksy Modern Islamic) */
+    --color-primary: #065F46;    /* Emerald 800 */
+    --color-primary-hover: #047857; /* Emerald 700 for hover */
+    --color-primary-light: #D1FAE5; /* Emerald 100 for active bg */
+    --color-accent: #D4AF37;     /* Gold */
+    --color-surface: #F8FAFC;    /* Slate 50 for app bg */
+    --color-card: #FFFFFF;       /* White for cards */
+    --color-dark: #1E293B;       /* Slate 800 */
+    --color-muted: #64748B;      /* Slate 500 */
+
+    /* Typography */
+    --font-sans: "Plus Jakarta Sans", sans-serif;
+
+    /* Animations */
+    --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| 2. Base Layer
+|--------------------------------------------------------------------------
+| Style dasar untuk elemen HTML fundamental.
+*/
+body {
+    @apply bg-surface text-dark font-sans antialiased;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 3. Reusable Utility & Helper Classes
+|--------------------------------------------------------------------------
+| Kelas kecil untuk pola spesifik yang berulang.
+*/
+.glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm;
+}
+
+.section-padding {
+    @apply py-20 lg:py-24;
+}
+
+.container {
+    @apply mx-auto px-6;
+}
+
+@utility bg-right-center {
+    background-position: right center;  
+}
+/*
+|--------------------------------------------------------------------------
+| 4. Semantic Component Classes
+|--------------------------------------------------------------------------
+| Abstraksi komponen UI untuk konsistensi dan kemudahan maintenance.
+*/
+
+/* Buttons */
+.btn {
+    @apply inline-block px-6 py-3 rounded-xl font-bold text-base transition duration-300 transform;
+}
+.btn-primary {
+    @apply bg-primary text-white shadow-lg shadow-emerald-900/20 hover:scale-105 hover:bg-emerald-800;
+}
+.btn-secondary {
+    @apply bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+}
+.btn-primary-ghost {
+    @apply font-semibold text-primary hover:bg-primary/5 rounded-full px-5 py-2 text-sm;
+}
+.btn-accent {
+    @apply bg-accent text-slate-900 rounded-full shadow-lg shadow-yellow-900/20 hover:bg-yellow-400;
+}
+
+/* Typography */
+.section-title {
+    @apply text-3xl md:text-4xl font-bold text-slate-900 mb-4;
+}
+.section-subtitle {
+    @apply text-lg text-muted leading-relaxed max-w-2xl mx-auto;
+}
+
+/* Cards */
+.card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition duration-300;
+}
+.card-body {
+    @apply p-6;
+}
+.card-footer {
+    @apply p-4 border-t border-slate-100 bg-slate-50;
+}
+
+/* Navigation */
+
+.nav-link {
+
+    @apply font-medium text-sm text-slate-600 hover:text-primary transition;
+
+}
+
+
+
+/*
+
+|--------------------------------------------------------------------------
+
+| 5. Form & Authentication Components
+
+|--------------------------------------------------------------------------
+
+*/
+
+.auth-card {
+
+    @apply w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-2xl border border-slate-100;
+
+}
+
+
+
+.form-label {
+
+    @apply block text-sm font-medium text-slate-700 mb-1;
+
+}
+
+
+
+.form-input {
+    @apply block w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition;
+}
+
+.form-select {
+    @apply block w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition;
+    @apply appearance-none bg-white bg-no-repeat bg-right-center; /* Custom arrow */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-size: 1.5em 1.5em; /* Ukuran arrow */
+    padding-right: 2.5rem; /* Untuk mengakomodasi arrow */
+}
+
+.form-textarea {
+    @apply block w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition;
+}
+
+.form-input.is-invalid {
+
+    @apply border-red-500 text-red-600 focus:ring-red-500/50 focus:border-red-500;
+
+}
+
+
+
+.form-check-label {
+
+    @apply text-sm text-slate-600;
+
+}
+
+.form-check-input {
+
+    @apply h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary/50;
+
+}
+
+
+
+.form-error {
+
+    @apply text-xs text-red-600 mt-1;
+
+}
+
+.icon-size-normal {
+    @apply h-4 w-4 hover:text-primary cursor-pointer transition duration-300;
+}
+
+.icon-size-md {
+    @apply h-5 w-5 hover:text-primary cursor-pointer transition duration-300;
+}
+
+.icon-size-lg {
+    @apply h-6 w-6 hover:text-primary cursor-pointer transition duration-300;
+}
+
+.icon-size-xl {
+    @apply h-8 w-8 hover:text-primary cursor-pointer transition duration-300;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 6. Reusable Modal Component
+|--------------------------------------------------------------------------
+*/
+.modal-backdrop {
+    @apply fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+}
+
+.modal-content {
+    @apply bg-white rounded-xl shadow-2xl max-h-full overflow-y-auto;
+    @apply w-full max-w-lg; /* Default max-width */
+}
+
+.modal-header {
+    @apply flex justify-between items-center p-4 border-b border-slate-200;
+}
+
+.modal-title {
+    @apply text-xl font-bold text-slate-800;
+}
+
+.modal-close-btn {
+    @apply p-2 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition;
+}
+
+.modal-body {
+    @apply p-4;
+}
+
+.modal-footer {
+    @apply p-4 border-t border-slate-200 flex justify-end gap-2;
+}
+

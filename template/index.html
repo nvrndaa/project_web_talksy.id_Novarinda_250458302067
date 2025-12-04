@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talksy.id - Belajar Bahasa Inggris Berkah & Profesional</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            /* Color Palette: Modern Islamic Theme */
+            --color-primary: #065F46;    /* Emerald 800 - Professional & Trust */
+            --color-primary-light: #10B981; 
+            --color-accent: #D4AF37;     /* Gold - High Value */
+            --color-surface: #FCFBF9;    /* Warm White - Paper feel */
+            --color-dark: #1E293B;       /* Slate 800 - Text */
+            
+            /* Fonts */
+            --font-sans: "Plus Jakarta Sans", sans-serif;
+
+            /* Animations */
+            --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utility custom utilities */
+        .glass-effect {
+            @apply bg-white/80 backdrop-blur-md border border-white/20;
+        }
+    </style>
+</head>
+<body class="bg-surface text-dark font-sans antialiased" x-data="talksyApp()">
+
+    <nav class="fixed w-full z-50 transition-all duration-300" 
+         :class="{ 'glass-effect shadow-sm py-3': isScrolled, 'bg-transparent py-5': !isScrolled }"
+         @scroll.window="isScrolled = (window.pageYOffset > 20)">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">T</div>
+                <span class="text-xl font-bold tracking-tight text-primary">Talksy<span class="text-accent">.id</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-medium text-sm text-slate-600">
+                <a href="#" class="hover:text-primary transition">Kurikulum</a>
+                <a href="#" class="hover:text-primary transition">Metode</a>
+                <a href="#" class="hover:text-primary transition">Biaya</a>
+            </div>
+            <div class="flex gap-3">
+                <a href="#" class="px-5 py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-full transition">Masuk</a>
+                <a href="#" class="px-5 py-2 text-sm font-semibold bg-primary text-white rounded-full hover:bg-emerald-800 transition shadow-lg shadow-emerald-900/20">Daftar Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="islamic-geo" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 20 L20 0 L40 20 L20 40 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#islamic-geo)" class="text-primary"/>
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-accent/10 text-yellow-700 text-xs font-bold tracking-wider mb-4 border border-accent/20">
+                    #1 ETHICAL ENGLISH LEARNING
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-slate-900 mb-6">
+                    Bicara Bahasa Inggris <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Dunia & Akhirat</span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                    Platform belajar bahasa Inggris interaktif dengan kurikulum terstruktur. 
+                    Tingkatkan skill komunikasi Anda untuk karir profesional dan dakwah global.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg shadow-xl shadow-emerald-900/20 hover:scale-105 transition transform hover:bg-emerald-800">
+                        Mulai Belajar Gratis
+                    </button>
+                    <button class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-lg hover:bg-slate-50 transition flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Lihat Preview Materi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="border-y border-slate-200 bg-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-primary mb-1">50+</div>
+                    <div class="text-sm text-slate-500">Modul Terstruktur</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-primary mb-1">10k+</div>
+                    <div class="text-sm text-slate-500">Siswa Aktif</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-primary mb-1">4.9</div>
+                    <div class="text-sm text-slate-500">Rating Review</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-primary mb-1">Lulus</div>
+                    <div class="text-sm text-slate-500">Sertifikasi Resmi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Kurikulum Tersusun Rapi</h2>
+                <p class="text-slate-600">Materi disusun bertahap (Step-by-step) agar mudah dipahami pemula.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <template x-for="(module, index) in db.modules" :key="module.id">
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col">
+                        <div class="p-6 bg-gradient-to-br from-slate-50 to-white border-b border-slate-100">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded" x-text="'Modul ' + module.order_index"></span>
+                                <div class="flex items-center gap-1 text-xs text-emerald-600 font-medium">
+                                    <div class="w-16 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-emerald-500" :style="`width: ${module.progress}%`"></div>
+                                    </div>
+                                    <span x-text="module.progress + '%'"></span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2" x-text="module.title"></h3>
+                            <p class="text-sm text-slate-500 line-clamp-2" x-text="module.description"></p>
+                        </div>
+
+                        <div class="p-4 flex-1">
+                            <ul class="space-y-3">
+                                <template x-for="material in module.materials" :key="material.id">
+                                    <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition group cursor-pointer">
+                                        <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                                             :class="material.is_completed ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'">
+                                            <template x-if="material.type === 'video'">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
+                                            </template>
+                                            <template x-if="material.type === 'text' || material.type === 'pdf'">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                                            </template>
+                                        </div>
+                                        
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-slate-700 group-hover:text-primary truncate" x-text="material.title"></p>
+                                            <p class="text-xs text-slate-400" x-text="material.duration || 'Bacaan'"></p>
+                                        </div>
+
+                                        <template x-if="material.is_completed">
+                                             <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </template>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 border-t border-slate-100 bg-slate-50">
+                            <button class="w-full py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-white hover:text-primary hover:border-primary transition flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                                Kerjakan Kuis Modul <span x-text="module.order_index"></span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white overflow-hidden relative">
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+            
+            <div class="lg:w-1/2 z-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Evaluasi & Dapatkan Sertifikat</h2>
+                <p class="text-slate-600 mb-8 text-lg">
+                    Setiap modul diakhiri dengan kuis untuk memastikan pemahaman Anda. Sistem kami akan mencatat skor dan memberikan sertifikat jika Anda lulus (<i>Passing Score: 70</i>).
+                </p>
+                
+                <div class="flex gap-4 mb-8">
+                    <div class="pl-4 border-l-4 border-accent">
+                        <h4 class="font-bold text-slate-800">Real-time Score</h4>
+                        <p class="text-sm text-slate-500">Hasil langsung keluar</p>
+                    </div>
+                    <div class="pl-4 border-l-4 border-accent">
+                        <h4 class="font-bold text-slate-800">Repeatable</h4>
+                        <p class="text-sm text-slate-500">Ulangi sampai paham</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2 w-full">
+                <div class="bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 relative">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
+
+                    <div x-data="{ 
+                        selectedOption: null, 
+                        isCorrect: false,
+                        checkAnswer() {
+                            if(this.selectedOption === 1) this.isCorrect = true; 
+                        }
+                    }">
+                        <div class="flex justify-between mb-6">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Quiz Preview</span>
+                            <span class="text-xs font-bold text-primary">Question 1 of 5</span>
+                        </div>
+
+                        <h4 class="text-xl font-bold text-slate-800 mb-6">
+                            Apa terjemahan yang paling tepat untuk: <br>
+                            <span class="text-primary italic">"Seek knowledge from cradle to grave"</span>?
+                        </h4>
+
+                        <div class="space-y-3">
+                            <template x-for="(opt, idx) in ['Tuntutlah ilmu walau ke negeri China', 'Tuntutlah ilmu dari buaian hingga liang lahat', 'Bekerjalah seolah hidup selamanya', 'Ilmu adalah cahaya']">
+                                <button @click="selectedOption = idx; checkAnswer()" 
+                                        class="w-full text-left p-4 rounded-xl border transition-all duration-200 flex items-center justify-between"
+                                        :class="{
+                                            'border-primary bg-primary/5 text-primary font-semibold': selectedOption === idx,
+                                            'border-slate-200 hover:border-slate-300 text-slate-600': selectedOption !== idx
+                                        }">
+                                    <span x-text="opt"></span>
+                                    
+                                    <div x-show="selectedOption === idx" class="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                </button>
+                            </template>
+                        </div>
+
+                        <div x-show="selectedOption !== null" x-transition class="mt-6 p-4 rounded-lg bg-slate-50 border border-slate-100 text-center">
+                            <p class="text-sm" :class="selectedOption === 1 ? 'text-emerald-600 font-bold' : 'text-red-500'">
+                                <span x-text="selectedOption === 1 ? 'Benar! Masya Allah, Excellent.' : 'Kurang tepat, coba lagi.'"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white pt-20 pb-10">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Siap Memulai Perjalanan Anda?</h2>
+            <p class="text-emerald-100 mb-10 max-w-2xl mx-auto">Bergabunglah dengan ribuan penuntut ilmu lainnya. Akses materi seumur hidup dan update gratis.</p>
+            <button class="px-10 py-4 bg-accent text-slate-900 rounded-full font-bold shadow-lg shadow-yellow-900/20 hover:bg-yellow-400 transition mb-20">
+                Daftar Akun Student
+            </button>
+
+            <div class="border-t border-emerald-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-emerald-200">
+                <p>&copy; 2025 Talksy.id. Built with Amanah.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function talksyApp() {
+            return {
+                isScrolled: false,
+                // Simulasi Database berdasarkan ERD
+                db: {
+                    // Table: modules & materials (joined for UI View)
+                    modules: [
+                        {
+                            id: 1,
+                            title: "Basic Conversation & Greetings",
+                            description: "Pelajari cara menyapa, berkenalan, dan basa-basi sopan dalam konteks formal maupun santai.",
+                            order_index: 1,
+                            progress: 100, // Calculated from material_completions
+                            materials: [
+                                { id: 101, title: "Video: Introduction to Greetings", type: "video", duration: "10 min", is_completed: true },
+                                { id: 102, title: "PDF: Vocabulary List - Daily Life", type: "pdf", duration: "5 pages", is_completed: true },
+                                { id: 103, title: "Text: Cultural Notes (Adab)", type: "text", duration: "5 min read", is_completed: true },
+                            ]
+                        },
+                        {
+                            id: 2,
+                            title: "Professional Email Writing",
+                            description: "Teknik menulis email bisnis yang efektif, sopan, dan langsung pada inti masalah.",
+                            order_index: 2,
+                            progress: 30,
+                            materials: [
+                                { id: 201, title: "Video: Subject Lines that Work", type: "video", duration: "15 min", is_completed: true },
+                                { id: 202, title: "PDF: Email Templates Collection", type: "pdf", duration: "12 pages", is_completed: false },
+                                { id: 203, title: "Text: Common Mistakes to Avoid", type: "text", duration: "8 min read", is_completed: false },
+                            ]
+                        },
+                        {
+                            id: 3,
+                            title: "Public Speaking for Dawah",
+                            description: "Membangun kepercayaan diri berbicara di depan umum dengan bahasa Inggris yang fasih.",
+                            order_index: 3,
+                            progress: 0,
+                            materials: [
+                                { id: 301, title: "Video: Overcoming Stage Fright", type: "video", duration: "20 min", is_completed: false },
+                                { id: 302, title: "Video: Structuring Your Speech", type: "video", duration: "25 min", is_completed: false },
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    </script>
+</body>
+</html>

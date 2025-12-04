@@ -1,0 +1,95 @@
+// ==========================================
+// ERD WEBSITE KURSUS: VERSI MVP (Cepat Jadi)
+// Fokus: Materi & Kuis Sederhana
+// ==========================================
+
+Enum user_role {
+  admin
+  student
+}
+
+Table users {
+  id int [pk, increment]
+  name varchar(255)
+  email varchar(255) [unique]
+  password varchar(255)
+  role user_role [default: 'student']
+  created_at timestamp
+}
+
+// ==========================================
+// MATERI PEMBELAJARAN
+// ==========================================
+
+Table modules {
+  id int [pk, increment]
+  title varchar(255)
+  description text
+  order_index int [note: "Urutan modul 1, 2, 3"]
+}
+
+Table materials {
+  id int [pk, increment]
+  module_id int [ref: > modules.id]
+  title varchar(255)
+  type varchar(50) [note: "video/text/pdf"]
+  content_url varchar(255) // Link Youtube / PDF
+  content_body text // Jika materi berupa teks panjang
+  created_at timestamp
+}
+
+// Tracking Progress Materi (Simple)
+Table material_completions {
+  user_id int [ref: > users.id]
+  material_id int [ref: > materials.id]
+  created_at timestamp [default: `now()`] // Waktu selesai baca
+
+  indexes {
+    (user_id, material_id) [pk] // Gabungan PK agar tidak duplikat
+  }
+}
+
+// ==========================================
+// SISTEM KUIS (Disederhanakan)
+// ==========================================
+
+Table quizzes {
+  id int [pk, increment]
+  module_id int [ref: > modules.id] // Kuis per Modul
+  title varchar(255)
+  passing_score int [default: 70]
+}
+
+Table questions {
+  id int [pk, increment]
+  quiz_id int [ref: > quizzes.id]
+  question_text text [not null]
+
+  // TEKNIK CEPAT: Simpan Opsi sebagai JSON
+  // Contoh: ["Apple", "Banana", "Cherry", "Date"]
+  options json [not null]
+
+  // Simpan index jawaban benar (misal: 1 untuk Banana)
+  correct_option_index int [not null]
+}
+
+// ==========================================
+// HASIL BELAJAR
+// ==========================================
+
+Table quiz_attempts {
+  id int [pk, increment]
+  user_id int [ref: > users.id]
+  quiz_id int [ref: > quizzes.id]
+  score int
+  is_passed boolean
+  created_at timestamp
+}
+
+// Sertifikat (Hanya ada jika user lulus semua modul)
+Table certificates {
+  id int [pk, increment]
+  user_id int [ref: > users.id]
+  certificate_code varchar(50) [unique]
+  created_at timestamp
+}
